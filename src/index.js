@@ -22,4 +22,4 @@ root.render(
 );
 
 
-reportWebVitals();
+
