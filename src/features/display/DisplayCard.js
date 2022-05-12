@@ -13,4 +13,4 @@ const DisplayCard = ({ item }) => {
     );
 };
 
-export default DisplayCard
+export default DisplayCard;
