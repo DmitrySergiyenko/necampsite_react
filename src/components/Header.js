@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import UserLoginForm, {userLoginForm} from '../features/user/UserLoginForm';
 import { Navbar, NavbarBrand, Collapse, NavbarToggler, Nav, MavItem, NavItem } from "reactstrap";
 import { NavLink } from 'react-router-dom';
 import NucampLogo from '../app/assets/img/logo.png';
@@ -36,6 +37,7 @@ const Header = () => {
                         </NavLink>
                     </NavItem>
                 </Nav>
+                <UserLoginForm />
             </Collapse>
         </Navbar>
     );
