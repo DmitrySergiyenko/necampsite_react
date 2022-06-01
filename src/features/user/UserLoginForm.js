@@ -17,7 +17,7 @@ import { validateUserLoginForm } from '../../utils/validateUserLoginForm';
 const UserLoginForm = () => {
     const [loginModalOpen, setLoginModalOpen] = useState(false);
     const currentUser = useSelector(selectCurrentUser)
-    const dispath = useDispatch()
+    const dispatch = useDispatch()
 
     const handleLogin = (values) => {
         const currentUser = {
@@ -26,7 +26,7 @@ const UserLoginForm = () => {
             username: values.username,
             password: values.password     
         };
-        dispath(setCurrentUser(currentUser));
+        dispatch(setCurrentUser(currentUser));
         setLoginModalOpen(false);
     }
 
@@ -70,7 +70,7 @@ const UserLoginForm = () => {
                             <Field 
                                 id= 'username'
                                 name = 'username'
-                                placegolder='Username'
+                                placeholder='Username'
                                 className='form-control'
                             />
                             <ErrorMessage name='username'>
@@ -84,7 +84,7 @@ const UserLoginForm = () => {
                             <Field
                                 id= 'password'
                                 name = 'password'
-                                placegolder='Password'
+                                placeholder='Password'
                                 className='form-control'
                                 type='password'                           
                             />

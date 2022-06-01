@@ -8,7 +8,7 @@ import {addComment} from './commentsSlice';
 const CommentForm = ({ campsiteId }) => {
     const [modalOpen, setModalOpen] = useState(false);
 
-    const dispath = useDispatch();
+    const dispatch = useDispatch();
 
     const handleSubmit = (values) => {
         const comment = {
@@ -19,7 +19,7 @@ const CommentForm = ({ campsiteId }) => {
             date: new Date(Date.now()).toISOString()
         };
         console.log(comment);
-        dispath(addComment(comment));
+        dispatch(addComment(comment));
         setModalOpen(false);
     };
 

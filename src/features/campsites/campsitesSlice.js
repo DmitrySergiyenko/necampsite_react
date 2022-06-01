@@ -1,14 +1,46 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { CAMPSITES } from '../../app/shared/CAMPSITES';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+//import { getArchtype } from 'immer/dist/internal';
+//import { CAMPSITES } from '../../app/shared/CAMPSITES';
+import {baseUrl} from '../../app/shared/baseUrl';
+import {mapImageURL} from '../../utils/mapImageURL'; 
 
+
+export const fetchCamsites = createAsyncThunk(
+    'campsites/fetchCampsites',
+    async () => {
+        const response = await fetch(baseUrl + 'campsites');
+        if (!response.ok) {
+            return Promise.reject('Unable to fetxh, status: ' + response.status);
+        }
+        const data = await response.json();
+        return data; 
+    }
+);
 
 const initialState={
-    campsitesArray: CAMPSITES
+    campsitesArray: [],
+    isLoading: true,
+    errMsg: ''
 };
 
 const campsitesSlice = createSlice({
     name: 'campsites',
-    initialState
+    initialState,
+    reducers: {},
+    extraReducers: {
+        [fetchCamsites.pending]: (state) => {
+            state.isLoading = true;
+        },
+        [fetchCamsites.fulfilled]: (state, action) =>{
+            state.isLoading = false;
+            state.errMsg = '';
+            state.campsitesArray = mapImageURL(action.payload);
+        },
+        [fetchCamsites.rejected]: (state, action) => {
+            state.isLoading = false;
+            state.errMsg = action.error ? action.error.message : 'Fetch failed';
+        }
+    }
 });
 
 export const campsitesReducer = campsitesSlice.reducer;

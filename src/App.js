@@ -1,4 +1,6 @@
 import React from 'react';
+import { useEffect } from 'react';
+import {useDispatch} from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ContactPage from './pages/ContactPage';
@@ -7,10 +9,19 @@ import CampsitesDirectoryPage from './pages/CampsitesDirectoryPage';
 import Footer from './components/Footer';
 import CampsiteDetailPage from './pages/CampsiteDetailPage';
 import AboutPage from './pages/AboutPage';
+import { fetchCamsites } from './features/campsites/campsitesSlice';
 import './App.css';
 
 
+
 function App() {
+  const dispach = useDispatch();
+
+  useEffect(() => {
+    dispach(fetchCamsites());
+  }, [dispach]);
+  
+
   return (
     <div className="App">
       <Header />
