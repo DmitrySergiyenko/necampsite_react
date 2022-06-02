@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 //import { getArchtype } from 'immer/dist/internal';
 //import { CAMPSITES } from '../../app/shared/CAMPSITES';
-import {baseUrl} from '../../app/shared/baseUrl';
-import {mapImageURL} from '../../utils/mapImageURL'; 
+import { baseUrl } from '../../app/shared/baseUrl';
+import { mapImageURL } from '../../utils/mapImageURL';
+
 
 
 export const fetchCamsites = createAsyncThunk(
@@ -13,11 +14,11 @@ export const fetchCamsites = createAsyncThunk(
             return Promise.reject('Unable to fetxh, status: ' + response.status);
         }
         const data = await response.json();
-        return data; 
+        return data;
     }
 );
 
-const initialState={
+const initialState = {
     campsitesArray: [],
     isLoading: true,
     errMsg: ''
@@ -31,7 +32,7 @@ const campsitesSlice = createSlice({
         [fetchCamsites.pending]: (state) => {
             state.isLoading = true;
         },
-        [fetchCamsites.fulfilled]: (state, action) =>{
+        [fetchCamsites.fulfilled]: (state, action) => {
             state.isLoading = false;
             state.errMsg = '';
             state.campsitesArray = mapImageURL(action.payload);
