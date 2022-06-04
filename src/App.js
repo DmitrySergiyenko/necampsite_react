@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import CampsiteDetailPage from './pages/CampsiteDetailPage';
 import AboutPage from './pages/AboutPage';
 import { fetchCamsites } from './features/campsites/campsitesSlice';
+import { fetchParthets } from './features/partners/partnersSlice';
 import './App.css';
 
 
@@ -19,6 +20,7 @@ function App() {
 
   useEffect(() => {
     dispach(fetchCamsites());
+    dispach(fetchParthets());
   }, [dispach]);
   
 
