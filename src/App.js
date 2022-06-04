@@ -11,6 +11,7 @@ import CampsiteDetailPage from './pages/CampsiteDetailPage';
 import AboutPage from './pages/AboutPage';
 import { fetchCamsites } from './features/campsites/campsitesSlice';
 import { fetchParthets } from './features/partners/partnersSlice';
+import { fetchPromotions } from './features/promotions/promotionsSlice';
 import './App.css';
 
 
@@ -21,6 +22,7 @@ function App() {
   useEffect(() => {
     dispach(fetchCamsites());
     dispach(fetchParthets());
+    dispach(fetchPromotions());
   }, [dispach]);
   
 
