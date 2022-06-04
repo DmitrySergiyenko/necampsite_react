@@ -3,7 +3,7 @@ import { baseUrl } from '../../app/shared/baseUrl';
 //import { PARTNERS } from '../../app/shared/PARTNERS';
 import { mapImageURL } from '../../utils/mapImageURL';
 
-export const fetchParthets = createAsyncThunk(
+export const fetchPartners = createAsyncThunk(
     'partners/fetchPartners',
     async () => {
         const response = await fetch(baseUrl + 'partners');
@@ -13,7 +13,7 @@ export const fetchParthets = createAsyncThunk(
         const data = await response.json();
         return data;
     }
-)
+);
 
 const initialState = {
     partnersArray: [],
@@ -26,19 +26,18 @@ const partnersSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: {
-        [fetchParthets.pending]: (state) => {
+        [fetchPartners.pending]: (state) => {
             state.isLoading = true;
         },
-        [fetchParthets.fulfilled]: (state, action) => {
+        [fetchPartners.fulfilled]: (state, action) => {
             state.isLoading = false;
             state.errMsg = '';
             state.partnersArray = mapImageURL(action.payload);
         },
-        [fetchParthets.rejected]: (state, action) => {
+        [fetchPartners.rejected]: (state, action) => {
             state.isLoading = false;
             state.errMsg = action.error ? action.error.message : 'Fetch failed';
         }
-
     }
 });
 
@@ -49,6 +48,10 @@ export const selectAllPartners = (state) => {
 };
 
 export const selectFeaturedPartner = (state) => {
-    return state.partners.partnersArray.find((partner) => partner.featured);
+    return {
+        featuredItem: state.partners.partnersArray.find((partner) => partner.featured),
+        isLoading: state.partners.isLoading,
+        errMsg: state.partners.errMsg
+    };
 };
 
